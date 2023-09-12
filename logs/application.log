@@ -1,0 +1,11 @@
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T03:59:11.214Z"}
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T04:06:53.072Z"}
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T04:07:03.500Z"}
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T04:08:07.317Z"}
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T04:08:37.780Z"}
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T04:10:15.965Z"}
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T04:10:21.500Z"}
+{"level":"error","message":"Manual error","service":"auth-service","timestamp":"2023-09-12T04:10:31.081Z"}
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T04:10:31.082Z"}
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T04:10:53.969Z"}
+{"level":"info","message":"Server running on 5501","service":"auth-service","timestamp":"2023-09-12T04:11:01.707Z"}

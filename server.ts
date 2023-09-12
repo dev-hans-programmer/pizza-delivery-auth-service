@@ -1,3 +1,4 @@
+import { logger } from './src/config/logger';
 import app from './src/app';
 import { CONFIG } from './src/config';
 
@@ -5,10 +6,13 @@ const port = CONFIG.PORT || 8000;
 const startServer = async (port: number) => {
     try {
         app.listen(port, () => {
-            // console.log(`Server running on ${port}`);
+            logger.info(`Server running on ${port}`);
         });
-    } catch (error) {
-        // console.log(error);
+    } catch (error: unknown) {
+        typeof error === 'object' &&
+            error !== null &&
+            'message' in error &&
+            logger.error(error.message);
     }
 };
 

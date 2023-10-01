@@ -11,8 +11,14 @@ export const logger = winston.createLogger({
     transports: [
         new winston.transports.File({
             dirname: 'logs',
-            filename: 'application.log',
+            filename: 'combined.log',
             level: 'info',
+            silent: CONFIG.ENVIRONMENT === 'test',
+        }),
+        new winston.transports.File({
+            dirname: 'logs',
+            filename: 'error.log',
+            level: 'error',
             silent: CONFIG.ENVIRONMENT === 'test',
         }),
         new winston.transports.Console({

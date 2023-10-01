@@ -3,7 +3,7 @@ import app from './src/app';
 import { CONFIG } from './src/config';
 
 const port = CONFIG.PORT || 8000;
-const startServer = async (port: number) => {
+const startServer = (port: number) => {
     try {
         app.listen(port, () => {
             logger.info(`Server running on ${port}`);

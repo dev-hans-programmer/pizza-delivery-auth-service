@@ -18,5 +18,21 @@ describe('POST /auth/register', () => {
 
             expect(response.statusCode).toBe(201);
         });
+        it('Should return valid json response', async () => {
+            const user = {
+                firstName: 'Hasan',
+                lastName: 'Ali',
+                email: 'hans@gmail.com',
+                password: 'secret',
+            };
+
+            const response = await request(app)
+                .post('/auth/register')
+                .send(user);
+
+            expect(
+                (response.headers as Record<string, string>)['content-type'],
+            ).toEqual(expect.stringContaining('json'));
+        });
     });
 });

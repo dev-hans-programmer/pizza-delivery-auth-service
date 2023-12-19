@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { logger } from './src/config/logger';
 import app from './src/app';
 import { CONFIG } from './src/config';

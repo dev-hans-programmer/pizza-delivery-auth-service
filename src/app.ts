@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import { HttpError } from 'http-errors';
 import { logger } from './config/logger';
+import { authRouter } from './routes/auth';
 
 const app = express();
 
@@ -11,6 +12,8 @@ app.use(cors());
 app.get('/', (req: Request, res: Response) => {
     res.json({ message: 'Welcome to auth service' });
 });
+
+app.use('/auth', authRouter);
 
 // error middleware
 app.use(

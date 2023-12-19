@@ -7,7 +7,9 @@ const port = CONFIG.PORT || 8000;
 const startServer = (port: number) => {
     try {
         app.listen(port, () => {
-            logger.info(`Server running on ${port}`);
+            logger.info(
+                `Server running on ${port} in ${process.env.NODE_ENV} mode`,
+            );
         });
     } catch (error: unknown) {
         error instanceof Error

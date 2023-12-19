@@ -4,14 +4,16 @@
     "description": "This is the auth service for pizza delivery app",
     "main": "server.ts",
     "scripts": {
-        "dev": "nodemon server",
+        "dev": "cross-env NODE_ENV=dev nodemon server",
         "format": "prettier .",
         "format:check": "npm run format -- --check",
         "format:fix": "npm run format -- --write",
         "lint": "eslint .",
         "lint:fix": "npm run lint -- --fix",
         "prepare": "husky install",
-        "test": "jest --watch --runInBand"
+        "test": "jest --watch --runInBand",
+        "start": "ts-node src/index.ts",
+        "typeorm": "typeorm-ts-node-commonjs"
     },
     "repository": {
         "type": "git",
@@ -37,11 +39,12 @@
         "@types/express": "^4.17.17",
         "@types/http-errors": "^2.0.1",
         "@types/jest": "^29.5.5",
-        "@types/node": "^20.6.0",
+        "@types/node": "^16.11.10",
         "@types/supertest": "^2.0.13",
         "@types/winston": "^2.4.4",
         "@typescript-eslint/eslint-plugin": "^6.6.0",
         "@typescript-eslint/parser": "^6.6.0",
+        "cross-env": "^7.0.3",
         "eslint": "^8.49.0",
         "eslint-config-prettier": "^9.0.0",
         "husky": "^8.0.3",
@@ -51,14 +54,17 @@
         "prettier": "^3.0.3",
         "supertest": "^6.3.3",
         "ts-jest": "^29.1.1",
-        "ts-node": "^10.9.1",
-        "typescript": "^5.2.2"
+        "ts-node": "10.7.0",
+        "typescript": "4.5.2"
     },
     "dependencies": {
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
         "express": "^4.18.2",
         "http-errors": "^2.0.0",
+        "pg": "^8.4.0",
+        "reflect-metadata": "^0.1.13",
+        "typeorm": "0.3.17",
         "winston": "^3.10.0"
     }
 }

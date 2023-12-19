@@ -9,10 +9,9 @@ const startServer = (port: number) => {
             logger.info(`Server running on ${port}`);
         });
     } catch (error: unknown) {
-        typeof error === 'object' &&
-            error !== null &&
-            'message' in error &&
-            logger.error(error.message);
+        error instanceof Error
+            ? logger.error(error.message)
+            : logger.error('Something went wrong while running the server');
     }
 };
 

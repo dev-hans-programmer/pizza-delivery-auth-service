@@ -69,6 +69,7 @@ describe('POST /auth/register', () => {
 
             // Assert
             expect(users).toHaveLength(1);
+            expect(users[0].email).toBe(user.email);
         });
     });
 });

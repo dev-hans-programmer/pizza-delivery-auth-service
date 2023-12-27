@@ -6,7 +6,7 @@ config({ path: path.join(__dirname, `../../.env.${process.env.NODE_ENV}`) });
 const {
     PORT,
     LOG_LEVEL,
-    ENVIRONMENT,
+    NODE_ENV,
     DB_HOST,
     DB_PORT,
     DB_USERNAME,
@@ -17,7 +17,7 @@ const {
 export const CONFIG = {
     PORT,
     LOG_LEVEL,
-    ENVIRONMENT,
+    ENVIRONMENT: NODE_ENV,
     DB_HOST,
     DB_PORT,
     DB_USERNAME,

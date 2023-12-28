@@ -14,7 +14,9 @@ describe('POST /auth/register', () => {
 
     beforeEach(async () => {
         // Database truncate
-        await truncateTable(connection);
+        await connection.dropDatabase();
+        await connection.synchronize();
+        // await truncateTable(connection);
     });
 
     afterAll(async () => {
@@ -28,7 +30,7 @@ describe('POST /auth/register', () => {
                 firstName: 'Hasan',
                 lastName: 'Ali',
                 email: 'hans@gmail.com',
-                password: 'secret',
+                password: 'secretupdated',
             };
 
             const response = await request(app)
@@ -42,7 +44,7 @@ describe('POST /auth/register', () => {
                 firstName: 'Hasan',
                 lastName: 'Ali',
                 email: 'hans@gmail.com',
-                password: 'secret',
+                password: 'secretupdated',
             };
 
             const response = await request(app)
@@ -59,7 +61,7 @@ describe('POST /auth/register', () => {
                 firstName: 'Hasan',
                 lastName: 'Ali',
                 email: 'hans@gmail.com',
-                password: 'secret',
+                password: 'secretupdated',
             };
 
             // Act
@@ -70,6 +72,43 @@ describe('POST /auth/register', () => {
             // Assert
             expect(users).toHaveLength(1);
             expect(users[0].email).toBe(user.email);
+        });
+
+        it('Should return an id of the created user', async () => {
+            const user = {
+                firstName: 'Hasan',
+                lastName: 'Ali',
+                email: 'hans@gmail.com',
+                password: 'secretupdated',
+            };
+
+            // Act
+            const createdUser = await request(app)
+                .post('/auth/register')
+                .send(user);
+            const userRepo = connection.getRepository(User);
+            const users = await userRepo.find();
+
+            // Assert
+            const id = +createdUser.text.split(':')[1].replace('}', '');
+            expect(users[0].id).toEqual(id);
+        });
+
+        it('Should have customer role', async () => {
+            const user = {
+                firstName: 'Hasan',
+                lastName: 'Ali',
+                email: 'hans@gmail.com',
+                password: 'secretupdated',
+                role: 'customer',
+            };
+
+            // Act
+            await request(app).post('/auth/register').send(user);
+            const userRepo = connection.getRepository(User);
+            const users = await userRepo.find();
+
+            expect(users[0]).toHaveProperty('role');
         });
     });
 });

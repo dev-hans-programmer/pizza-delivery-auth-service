@@ -3,4 +3,5 @@ export interface UserDto {
     lastName: string;
     email: string;
     password: string;
+    role: string;
 }

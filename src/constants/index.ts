@@ -1,5 +1,7 @@
 export const UserRoles = {
     CUSTOMER: 'customer',
     ADMIN: 'admin',
-    MANAGER: 'managwer',
+    MANAGER: 'manager',
 } as const;
+
+export const SaltRounds = 10;

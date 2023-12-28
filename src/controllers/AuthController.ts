@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import { UserService } from '../services/UserService';
 import * as types from '../types';
 import { Logger } from 'winston';
+import bcrypt from 'bcryptjs';
+import { SaltRounds } from '../constants';
 
 export class AuthController {
     constructor(
@@ -10,13 +12,20 @@ export class AuthController {
     ) {}
 
     async register(req: Request, res: Response, next: NextFunction) {
-        this.logger.info('New request to register a user');
+        // this.logger.info('New request to register a user');
+
+        const { firstName, lastName, email, password } =
+            req.body as types.UserDto;
         try {
+            const hashedPassword = await bcrypt.hash(password, SaltRounds);
             const user = await this.userService.create({
-                ...req.body,
+                firstName,
+                lastName,
+                email,
+                password: hashedPassword,
                 role: 'customer',
-            } as types.UserDto);
-            this.logger.info('User has been created', { id: user.id });
+            });
+            // this.logger.info('User has been created', { id: user.id });
 
             res.status(201).send({ id: user.id });
         } catch (err) {

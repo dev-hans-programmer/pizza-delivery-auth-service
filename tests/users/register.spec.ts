@@ -111,5 +111,24 @@ describe('POST /auth/register', () => {
             expect(users[0]).toHaveProperty('role');
             expect(users[0].role).toEqual(UserRoles.CUSTOMER);
         });
+
+        it('Should store the hashed password', async () => {
+            const user = {
+                firstName: 'Hasan',
+                lastName: 'Ali',
+                email: 'hans@gmail.com',
+                password: 'secretupdated',
+                role: 'customer',
+            };
+
+            // Act
+            await request(app).post('/auth/register').send(user);
+            const userRepo = connection.getRepository(User);
+            const users = await userRepo.find();
+
+            expect(users[0].password).not.toBe(user.password);
+            expect(users[0].password).toHaveLength(60);
+            expect(users[0].password).toMatch(/^\$2a\$\d+\$/);
+        });
     });
 });

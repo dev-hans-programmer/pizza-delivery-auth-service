@@ -1,9 +1,9 @@
-import { DataSource } from 'typeorm';
 import app from '../../src/app';
 import request from 'supertest';
+import { DataSource } from 'typeorm';
 import { AppDataSource } from '../../src/config/data-source';
-import { truncateTable } from '../utils';
 import { User } from '../../src/entity/User';
+import { UserRoles } from '../../src/constants';
 
 describe('POST /auth/register', () => {
     let connection: DataSource;
@@ -109,6 +109,7 @@ describe('POST /auth/register', () => {
             const users = await userRepo.find();
 
             expect(users[0]).toHaveProperty('role');
+            expect(users[0].role).toEqual(UserRoles.CUSTOMER);
         });
     });
 });

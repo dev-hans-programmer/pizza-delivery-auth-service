@@ -130,5 +130,26 @@ describe('POST /auth/register', () => {
             expect(users[0].password).toHaveLength(60);
             expect(users[0].password).toMatch(/^\$2a\$\d+\$/);
         });
+
+        it('Should have unique email', async () => {
+            const user1 = {
+                firstName: 'Hasan',
+                lastName: 'Ali',
+                email: 'hans@gmail.com',
+                password: 'secretupdated',
+                role: 'customer',
+            };
+
+            const userRepo = connection.getRepository(User);
+            await userRepo.save(user1);
+            const users = await userRepo.find();
+
+            const response = await request(app)
+                .post('/auth/register')
+                .send(user1);
+
+            expect(response.statusCode).toEqual(400);
+            expect(users).toHaveLength(1);
+        });
     });
 });

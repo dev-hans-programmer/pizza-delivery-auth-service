@@ -1,8 +1,8 @@
+import bcrypt from 'bcryptjs';
+import * as types from '../types';
 import { NextFunction, Request, Response } from 'express';
 import { UserService } from '../services/UserService';
-import * as types from '../types';
 import { Logger } from 'winston';
-import bcrypt from 'bcryptjs';
 import { SaltRounds } from '../constants';
 
 export class AuthController {
@@ -25,7 +25,7 @@ export class AuthController {
                 password: hashedPassword,
                 role: 'customer',
             });
-            // this.logger.info('User has been created', { id: user.id });
+            this.logger.info('User has been created', { id: user.id });
 
             res.status(201).send({ id: user.id });
         } catch (err) {

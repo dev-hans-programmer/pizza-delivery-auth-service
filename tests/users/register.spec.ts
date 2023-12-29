@@ -186,5 +186,27 @@ describe('POST /auth/register', () => {
 
             expect(users[0].email).toBe(user.email.trim());
         });
+
+        it('Email should be valid', async () => {
+            const user = {
+                firstName: 'Hasan',
+                lastName: 'Ali',
+                email: 'jjjjj',
+                password: 'secretupdated',
+                role: 'customer',
+            };
+
+            const response = await request(app)
+                .post('/auth/register')
+                .send(user);
+            const userRepo = connection.getRepository(User);
+            const users = await userRepo.find();
+            const actualError = (
+                (JSON.parse(response.text) as Record<string, never[]>)
+                    .errors[0] as Record<string, string>
+            ).msg;
+            expect(actualError).toBe('Email is not valid');
+            expect(users).toHaveLength(0);
+        });
     });
 });
